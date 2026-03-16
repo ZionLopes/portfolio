@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Zion Lopes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#090909;--s1:#111;--s2:#1a1a1a;--ln:#232323;--mut:#555;--mid:#999;
+  --tx:#dedad3;--wh:#f2ede4;--ac:#c9f53b;--acd:#090909;
+  --fD:'Bebas Neue',sans-serif;--fB:'Outfit',sans-serif;--fM:'DM Mono',monospace;
+  --ease:cubic-bezier(.16,1,.3,1);--ease2:cubic-bezier(.87,0,.13,1);
+  --W:1360px;--PX:clamp(1.25rem,4vw,3rem);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--fB);overflow-x:hidden;line-height:1.6}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit}
+body::after{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.032}
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--ln)}
+
+/* cursor */
+#cd,#cr{display:none;position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+@media(hover:hover)and(pointer:fine){
+  *{cursor:none!important}#cd,#cr{display:block}
+  #cd{width:6px;height:6px;background:var(--ac);top:0;left:0}
+  #cr{width:32px;height:32px;border:1.5px solid rgba(201,245,59,.35);top:0;left:0;transition:width .3s var(--ease),height .3s var(--ease),border-color .3s,opacity .3s}
+  #cr.hov{width:56px;height:56px;border-color:var(--ac);opacity:.3}
+}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;overflow:hidden}
+#ld-top,#ld-bot{position:absolute;left:0;width:100%;height:50%;background:var(--bg);transition:transform .9s var(--ease2)}
+#ld-top{top:0}#ld-bot{bottom:0}
+#loader.out #ld-top{transform:translateY(-100%)}
+#loader.out #ld-bot{transform:translateY(100%)}
+#loader.done{pointer-events:none;display:none}
+.ld-inner{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(1.5rem,4vw,3rem)}
+.ld-brand{font-family:var(--fD);font-size:clamp(1.5rem,4vw,2.5rem);letter-spacing:.14em;color:var(--wh);overflow:hidden}
+.ld-brand span{display:inline-block;transform:translateY(110%);animation:sup .7s var(--ease) .1s forwards}
+.ld-count-wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem}
+.ld-count{font-family:var(--fD);font-size:clamp(6rem,18vw,20rem);line-height:.85;letter-spacing:-.02em;color:var(--wh);overflow:hidden}
+.ld-count-inner{display:block;transform:translateY(100%);animation:sup .7s var(--ease) .3s forwards}
+.ld-side{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;gap:.75rem;padding-bottom:.5rem}
+.ld-tag{font-family:var(--fM);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);overflow:hidden}
+.ld-tag span{display:inline-block;transform:translateY(110%);animation:sup .6s var(--ease) .5s forwards}
+.ld-bar-wrap{width:100%;height:1px;background:var(--ln);position:relative;overflow:hidden}
+.ld-bar-fill{position:absolute;left:0;top:0;height:100%;background:var(--ac);width:0%}
+@keyframes sup{to{transform:translateY(0)}}
+@keyframes fi{to{opacity:1}}
+
+/* nav */
+#nav{position:fixed;top:0;left:0;right:0;z-index:800;transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
+#nav.stuck{background:rgba(9,9,9,.92);backdrop-filter:blur(16px);border-color:var(--ln)}
+.nav-inner{max-width:var(--W);margin:0 auto;padding:1.35rem var(--PX);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;position:relative}
+.nav-logo{font-family:var(--fD);font-size:1.6rem;letter-spacing:.14em;color:var(--wh);transition:color .25s;justify-self:start}
+.nav-logo sup{color:var(--ac);font-size:.85rem}
+.nav-logo:hover{color:var(--ac)}
+.nav-links{display:flex;gap:2.5rem;align-items:center;justify-self:center}
+.nav-links a{font-family:var(--fM);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);position:relative;transition:color .25s;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--ac);transition:width .3s var(--ease)}
+.nav-links a:hover,.nav-links a.on{color:var(--wh)}
+.nav-links a.on::after,.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:.75rem;justify-self:end}
+.nav-avail{display:flex;align-items:center;gap:.45rem;font-family:var(--fM);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);border:1px solid rgba(201,245,59,.22);padding:.3rem .75rem}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--ac);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer}
+.nav-burger span{display:block;width:22px;height:1px;background:var(--tx);transition:transform .3s,opacity .3s}
+.nav-burger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.nav-drawer{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:790;background:rgba(9,9,9,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;transition:opacity .4s;pointer-events:none}
+.nav-drawer.open{opacity:1;pointer-events:all;display:flex}
+.nav-drawer a{font-family:var(--fD);font-size:clamp(2.5rem,8vw,5rem);letter-spacing:.06em;color:var(--wh);transition:color .25s}
+.nav-drawer a:hover{color:var(--ac)}
+
+/* shared */
+.wrap{max-width:var(--W);margin:0 auto;padding:0 var(--PX)}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--fM);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 2rem;border:none;cursor:pointer;white-space:nowrap;transition:transform .25s var(--ease),background .25s,color .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn-s{background:var(--ac);color:var(--acd)}
+.btn-s:hover{background:#d5ff3f;box-shadow:0 8px 30px rgba(201,245,59,.22)}
+.btn-o{background:transparent;color:var(--tx);border:1px solid var(--ln)}
+.btn-o:hover{border-color:var(--mid);color:var(--wh)}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rv.on{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.sec-lbl{font-family:var(--fM);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:.75rem;margin-bottom:3.5rem}
+.sec-lbl em{color:var(--ac);font-style:normal}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--ln);max-width:120px}
+
+/* ─── PHOTO HERO SECTION ──────────────────────────────── */
+.photo-hero{
+  height:100svh;min-height:560px;
+  position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;
+  margin-bottom:0;
+}
+.photo-hero-img{
+  position:absolute;inset:0;z-index:0;
+  background:var(--s1);
+}
+.photo-hero-img img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  filter:brightness(.55) grayscale(20%);
+  transform:scale(1.06);
+  transition:transform 8s ease;
+}
+.photo-hero.loaded .photo-hero-img img{transform:scale(1)}
+.photo-hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top, rgba(9,9,9,.95) 0%, rgba(9,9,9,.3) 60%, transparent 100%);
+}
+.photo-hero-content{
+  position:relative;z-index:2;
+  width:100%;max-width:var(--W);
+  margin:0 auto;padding:0 var(--PX) 4rem;
+  display:grid;grid-template-columns:1fr auto;
+  align-items:end;gap:3rem;
+}
+.photo-hero-title{
+  font-family:var(--fD);
+  font-size:clamp(3.5rem,8vw,9rem);
+  line-height:.88;letter-spacing:.02em;
+  color:var(--wh);
+  overflow:hidden;
+}
+.photo-hero-title .l{display:block;overflow:hidden}
+.photo-hero-title .l-in{
+  display:block;transform:translateY(110%);
+  transition:transform .9s var(--ease);
+}
+.photo-hero-title.vis .l-in{transform:translateY(0)}
+.photo-hero-title .l:nth-child(1) .l-in{transition-delay:.1s}
+.photo-hero-title .l:nth-child(2) .l-in{transition-delay:.25s;color:var(--ac)}
+.photo-hero-title .l:nth-child(3) .l-in{transition-delay:.4s}
+
+.photo-hero-meta{
+  display:flex;flex-direction:column;gap:1rem;
+  align-items:flex-end;padding-bottom:.5rem;
+}
+.photo-meta-tag{
+  font-family:var(--fM);font-size:.65rem;letter-spacing:.13em;
+  text-transform:uppercase;color:rgba(255,255,255,.5);
+  text-align:right;
+}
+.photo-scroll-hint{
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  font-family:var(--fM);font-size:.58rem;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.3);
+}
+.scroll-line{width:1px;height:40px;background:rgba(255,255,255,.2);animation:scroll-pulse 2s ease infinite}
+@keyframes scroll-pulse{0%,100%{transform:scaleY(1);opacity:.5}50%{transform:scaleY(.5);opacity:1}}
+
+/* ─── BIO SECTION ─────────────────────────────────────── */
+.bio-section{
+  padding:7rem 0 5rem;
+  border-bottom:1px solid var(--ln);
+  margin-bottom:6rem;
+}
+.bio-grid{
+  display:grid;grid-template-columns:1fr 1.4fr;
+  gap:6rem;align-items:start;
+}
+.bio-left{}
+.bio-num{
+  font-family:var(--fD);font-size:8rem;line-height:1;
+  color:var(--ln);letter-spacing:-.02em;
+  margin-bottom:1.5rem;
+  transition:color .3s;
+}
+.bio-left:hover .bio-num{color:var(--ac)}
+.bio-tagline{
+  font-family:var(--fD);font-size:clamp(1.8rem,3.5vw,3rem);
+  line-height:.95;letter-spacing:.02em;color:var(--wh);
+  margin-bottom:2rem;
+}
+.bio-tagline em{color:var(--ac);font-style:normal}
+.bio-links{display:flex;gap:.75rem;flex-wrap:wrap}
+
+.bio-right{}
+.bio-body{font-size:1rem;color:var(--mid);line-height:1.9;margin-bottom:1.4rem;font-weight:300}
+.bio-body strong{color:var(--tx);font-weight:600}
+.bio-body a{color:var(--ac);border-bottom:1px solid rgba(201,245,59,.3);transition:border-color .25s}
+.bio-body a:hover{border-color:var(--ac)}
+
+/* ─── SKILLS MARQUEE ──────────────────────────────────── */
+.mq-wrap{
+  border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);
+  padding:1.75rem 0;overflow:hidden;position:relative;margin-bottom:6rem;
+}
+.mq-wrap::before,.mq-wrap::after{content:'';position:absolute;top:0;height:100%;width:8rem;z-index:2}
+.mq-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.mq-wrap::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.mq-track{display:flex;width:max-content;animation:mq 38s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-item{display:flex;align-items:center;gap:.55rem;padding:0 2rem;border-right:1px solid var(--ln);font-family:var(--fM);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);white-space:nowrap;transition:color .25s}
+.mq-item:hover{color:var(--wh)}
+.mq-dot{width:4px;height:4px;border-radius:50%;background:var(--ac);flex-shrink:0}
+
+/* ─── TIMELINE ────────────────────────────────────────── */
+.tl-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:6rem}
+.tl-head{font-family:var(--fM);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);padding-bottom:1.25rem;border-bottom:1px solid var(--ln);margin-bottom:.5rem;display:flex;justify-content:space-between}
+.tl-head em{color:var(--ac);font-style:normal}
+.tl-item{
+  padding:1.4rem 0;border-bottom:1px solid var(--ln);
+  display:grid;grid-template-columns:1fr auto;gap:1rem;
+  transition:padding-left .3s var(--ease),background .3s;
+  position:relative;
+}
+.tl-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--ac);transform:scaleY(0);transition:transform .3s var(--ease);transform-origin:top}
+.tl-item:hover::before{transform:scaleY(1)}
+.tl-item:hover{padding-left:1rem}
+.tl-title{font-size:.93rem;font-weight:600;color:var(--tx);margin-bottom:.25rem;transition:color .25s}
+.tl-item:hover .tl-title{color:var(--wh)}
+.tl-org{font-size:.8rem;color:var(--mut)}
+.tl-year{font-family:var(--fM);font-size:.62rem;letter-spacing:.08em;color:var(--mut);text-align:right;white-space:nowrap;padding-top:.15rem}
+
+/* ─── AWARDS ──────────────────────────────────────────── */
+.awards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:6rem}
+.award-card{
+  border:1px solid var(--ln);padding:2rem 1.75rem;
+  background:var(--s1);position:relative;overflow:hidden;
+  transition:border-color .3s,transform .4s var(--ease);
+}
+.award-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,245,59,.06),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.award-card:hover{border-color:var(--ac);transform:translateY(-6px)}
+.award-card:hover::before{opacity:1}
+.award-icon{font-size:1.4rem;margin-bottom:1rem;display:block}
+.award-name{font-size:.92rem;font-weight:600;color:var(--wh);margin-bottom:.4rem;line-height:1.4}
+.award-date{font-family:var(--fM);font-size:.62rem;letter-spacing:.1em;color:var(--mut)}
+
+/* ─── STATS ───────────────────────────────────────────── */
+.stats-bar{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--ln)}
+.stat-cell{padding:3.5rem 2rem;text-align:center;border-right:1px solid var(--ln);transition:background .3s;position:relative;overflow:hidden}
+.stat-cell:last-child{border-right:none}
+.stat-cell::after{content:'';position:absolute;inset:0;background:var(--s1);transform:scaleY(0);transform-origin:bottom;transition:transform .4s var(--ease);z-index:0}
+.stat-cell:hover::after{transform:scaleY(1)}
+.stat-num,.stat-lbl{position:relative;z-index:1}
+.stat-num{font-family:var(--fD);font-size:clamp(3.5rem,6vw,6rem);color:var(--ac);line-height:1;letter-spacing:-.02em}
+.stat-lbl{font-family:var(--fM);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:.5rem}
+
+/* footer + btt */
+#ft{border-top:1px solid var(--ln);margin-top:6rem}
+.ft-inner{max-width:var(--W);margin:0 auto;padding:2rem var(--PX);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-copy,.ft-r{font-family:var(--fM);font-size:.62rem;letter-spacing:.1em;color:var(--mut)}
+.ft-socials{display:flex;gap:2rem}
+.ft-socials a{font-family:var(--fM);font-size:.62rem;letter-spacing:.1em;color:var(--mut);text-transform:uppercase;transition:color .25s;position:relative;}
+.ft-socials a::after{content:"";position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--ac);transition:width .3s var(--ease)}
+.ft-socials a:hover{color:var(--wh)}
+.ft-socials a:hover::after{width:100%}
+#btt{position:fixed;bottom:1.75rem;right:1.75rem;z-index:700;width:42px;height:42px;border:1px solid var(--ln);background:var(--bg);color:var(--mut);display:flex;align-items:center;justify-content:center;font-size:.9rem;text-decoration:none;opacity:0;visibility:hidden;transition:all .3s}
+#btt.on{opacity:1;visibility:visible}
+#btt:hover{border-color:var(--ac);color:var(--ac)}
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:900px){
+  .nav-links,.nav-avail{display:none}
+  .nav-burger{display:flex}
+  .nav-inner{grid-template-columns:1fr auto}
+  .bio-grid{grid-template-columns:1fr;gap:3rem}
+  .tl-grid{grid-template-columns:1fr;gap:3.5rem}
+  .awards-grid{grid-template-columns:1fr 1fr}
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .stats-bar .stat-cell:last-child{grid-column:span 2;border-top:1px solid var(--ln);border-right:none}
+  .photo-hero-content{grid-template-columns:1fr}
+  .photo-hero-meta{display:none}
+}
+@media(max-width:560px){
+  .awards-grid{grid-template-columns:1fr}
+  .stats-bar{grid-template-columns:1fr}
+  .stats-bar .stat-cell{border-right:none;border-bottom:1px solid var(--ln);grid-column:auto}
+  .stats-bar .stat-cell:last-child{grid-column:auto;border-top:none}
+  .photo-hero-title{font-size:clamp(2.8rem,14vw,4rem)}
+  .bio-num{font-size:5rem}
+}
+</style>
+</head>
+<body>
+<div id="cd"></div><div id="cr"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div id="ld-top"></div><div id="ld-bot"></div>
+  <div class="ld-inner">
+    <div class="ld-brand"><span>ZION LOPES</span></div>
+    <div class="ld-count-wrap">
+      <div class="ld-count"><span class="ld-count-inner" id="ld-num">00</span></div>
+      <div class="ld-side">
+        <div class="ld-tag"><span>Creative Developer</span></div>
+        <div class="ld-tag"><span>Digital Designer</span></div>
+        <div class="ld-tag"><span>Mumbai, India</span></div>
+      </div>
+    </div>
+    <div class="ld-bar-wrap"><div class="ld-bar-fill" id="ld-bar"></div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<header id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../index.html">ZL<sup>.</sup></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html" class="on">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-avail"><span class="nav-dot"></span>Available for work</span>
+      <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="nav-drawer" id="drawer">
+  <a href="../index.html">Home</a><a href="about.html">About</a>
+  <a href="projects.html">Projects</a><a href="contact.html">Contact</a>
+</nav>
+
+<main>
+
+  <!-- ── PHOTO HERO ──────────────────────────────────── -->
+  <section class="photo-hero" id="photo-hero">
+    <div class="photo-hero-img">
+      <img src="../photo.jpg" alt="Zion Lopes"
+           onerror="this.onerror=null;this.src='https://placehold.co/1400x900/111/c9f53b?text=ZION+LOPES'">
+    </div>
+    <div class="photo-hero-overlay"></div>
+    <div class="photo-hero-content">
+      <div class="photo-hero-title" id="phtitle">
+        <span class="l"><span class="l-in">ZION</span></span>
+        <span class="l"><span class="l-in">LOPES.</span></span>
+        <span class="l"><span class="l-in">ABOUT.</span></span>
+      </div>
+      <div class="photo-hero-meta">
+        <span class="photo-meta-tag">Mumbai, Maharashtra</span>
+        <span class="photo-meta-tag">Creative Developer</span>
+        <span class="photo-meta-tag">Est. 2003</span>
+        <div class="photo-scroll-hint">
+          <div class="scroll-line"></div>
+          <span>Scroll</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BIO ────────────────────────────────────────── -->
+  <section class="bio-section">
+    <div class="wrap">
+      <div class="sec-lbl rv"><em>01</em> / About Me</div>
+      <div class="bio-grid">
+        <div class="bio-left rv">
+          <div class="bio-num">01</div>
+          <h2 class="bio-tagline">BUILDING<br>THE WEB,<br>ONE LINE<br><em>AT A TIME.</em></h2>
+          <div class="bio-links">
+            <a href="../resume.pdf" class="btn btn-s" id="resume-btn" download>
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Resume
+            </a>
+            <a href="contact.html" class="btn btn-o">Work Together</a>
+          </div>
+        </div>
+        <div class="bio-right">
+          <p class="bio-body rv d1">I'm <strong>Zion Lopes</strong>, a Mumbai-based developer currently pursuing my degree in Computer Engineering at <strong>Xavier Institute of Engineering</strong>. I specialise in crafting performant, accessible, and visually sharp web applications.</p>
+          <p class="bio-body rv d2">My work sits at the crossroads of <strong>engineering precision</strong> and creative expression. From AI-powered healthcare chatbots to gym management platforms — I care deeply about every detail, from the architecture down to the last pixel.</p>
+          <p class="bio-body rv d3">When I'm not coding I'm exploring design systems, competing in hackathons, or collaborating on projects that push me further. I believe the best products are born from the marriage of clean code and intentional design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS MARQUEE ─────────────────────────────── -->
+  <div class="mq-wrap"><div class="mq-track" id="mq-track"></div></div>
+
+  <!-- ── TIMELINE ───────────────────────────────────── -->
+  <div class="wrap">
+    <div class="tl-grid">
+      <div class="rv">
+        <div class="tl-head">Education <em>—</em></div>
+        <div class="tl-item">
+          <div><div class="tl-title">B.E. Computer Engineering</div><div class="tl-org">Xavier Institute of Engineering</div></div>
+          <div class="tl-year">2025 –<br>Present</div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-title">Diploma in Computer Engineering</div><div class="tl-org">Bhausaheb Vartak Polytechnic</div></div>
+          <div class="tl-year">2022 –<br>2025</div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-title">Secondary School Certificate</div><div class="tl-org">Carmelite Convent High School</div></div>
+          <div class="tl-year">2011 –<br>2022</div>
+        </div>
+      </div>
+      <div class="rv d1">
+        <div class="tl-head">Experience <em>—</em></div>
+        <div class="tl-item">
+          <div><div class="tl-title">Assistant Manager</div><div class="tl-org">Brisk Bake Vasai</div></div>
+          <div class="tl-year">Jun 2025 –<br>Present</div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-title">Full-Stack Developer Intern</div><div class="tl-org">IWM BUZZ</div></div>
+          <div class="tl-year">Jun –<br>Aug 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AWARDS -->
+    <div class="sec-lbl rv" style="margin-bottom:2rem"><em>Recognition</em></div>
+    <div class="awards-grid">
+      <div class="award-card rv"><span class="award-icon">🏆</span><div class="award-name">NeuroFest Hackathon Winner</div><div class="award-date">February 2024</div></div>
+      <div class="award-card rv d1"><span class="award-icon">🥇</span><div class="award-name">Inter-College Project Competition Winner</div><div class="award-date">April 2024</div></div>
+      <div class="award-card rv d2"><span class="award-icon">💼</span><div class="award-name">Full-Stack Developer Internship</div><div class="award-date">Summer 2024</div></div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-bar rv" id="stats-section" style="margin-top:4rem">
+      <div class="stat-cell"><div class="stat-num counter" data-target="99">0</div><div class="stat-lbl">Community Members</div></div>
+      <div class="stat-cell"><div class="stat-num counter" data-target="10">0</div><div class="stat-lbl">Projects Built</div></div>
+      <div class="stat-cell"><div class="stat-num counter" data-target="14">0</div><div class="stat-lbl">Months Active</div></div>
+    </div>
+  </div>
+
+</main>
+
+<footer id="ft" style="margin-top:6rem">
+  <div class="ft-inner">
+    <span class="ft-copy">© 2025 Zion Lopes</span>
+    <nav class="ft-nav"><a href="../index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a></nav>
+    <span class="ft-r">Built in Mumbai 🇮🇳</span>
+  </div>
+</footer>
+<a href="#" id="btt">↑</a>
+
+<script>
+(function(){
+  /* LOADER */
+  var num=document.getElementById('ld-num'),bar=document.getElementById('ld-bar'),loader=document.getElementById('loader');
+  var count=0,start=null,dur=2200;
+  function step(ts){
+    if(!start)start=ts;
+    var p=Math.min((ts-start)/dur,1);
+    var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+    count=Math.floor(e*100);
+    num.textContent=count<10?'0'+count:count;
+    bar.style.width=count+'%';
+    if(p<1){requestAnimationFrame(step)}
+    else{
+      num.textContent='100';bar.style.width='100%';
+      setTimeout(function(){
+        loader.classList.add('out');
+        setTimeout(function(){loader.classList.add('done');loader.style.display='none';
+          /* trigger photo hero text */
+          var t=document.getElementById('phtitle');if(t)t.classList.add('vis');
+          var ph=document.getElementById('photo-hero');if(ph)ph.classList.add('loaded');
+        },950);
+      },350);
+    }
+  }
+  requestAnimationFrame(step);
+
+  /* CURSOR */
+  var cd=document.getElementById('cd'),cr=document.getElementById('cr');
+  if(cd&&window.matchMedia('(hover:hover)').matches){
+    var mx=0,my=0,rx=0,ry=0;
+    window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
+    (function r(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;cd.style.cssText='left:'+mx+'px;top:'+my+'px';cr.style.cssText='left:'+rx+'px;top:'+ry+'px';requestAnimationFrame(r)})();
+    function hov(){document.querySelectorAll('a,button,.award-card,.tl-item,.stat-cell').forEach(function(el){el.addEventListener('mouseenter',function(){cr.classList.add('hov')});el.addEventListener('mouseleave',function(){cr.classList.remove('hov')})})}
+    hov();new MutationObserver(hov).observe(document.body,{childList:true,subtree:true});
+  }
+
+  /* NAV */
+  var nav=document.getElementById('nav'),burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
+  window.addEventListener('scroll',function(){nav.classList.toggle('stuck',window.scrollY>30)},{passive:true});
+  if(burger){
+    burger.addEventListener('click',function(){burger.classList.toggle('open');drawer.classList.toggle('open');document.body.style.overflow=drawer.classList.contains('open')?'hidden':''});
+    drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){burger.classList.remove('open');drawer.classList.remove('open');document.body.style.overflow=''})});
+  }
+
+  /* BTT */
+  var btt=document.getElementById('btt');
+  window.addEventListener('scroll',function(){btt.classList.toggle('on',window.scrollY>400)},{passive:true});
+  btt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
+
+  /* REVEAL */
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.1});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+
+  /* MARQUEE */
+  var skills=['HTML5','CSS3','JavaScript','TypeScript','React','Next.js','Node.js','Python','Tailwind CSS','MongoDB','Firebase','Git','Figma','REST APIs'];
+  var track=document.getElementById('mq-track');
+  if(track)track.innerHTML=[...skills,...skills].map(function(s){return'<span class="mq-item"><span class="mq-dot"></span>'+s+'</span>'}).join('');
+
+  /* COUNTERS */
+  var sw=document.getElementById('stats-section');
+  if(sw){
+    var fired=false;
+    var sio=new IntersectionObserver(function(entries){
+      if(!entries[0].isIntersecting||fired)return;fired=true;
+      sw.querySelectorAll('.counter').forEach(function(el){
+        var t=+el.dataset.target,n=0,inc=t/130;
+        (function tick(){n=Math.min(n+inc,t);el.textContent=Math.ceil(n);if(n<t)setTimeout(tick,11)})();
+      });
+    },{threshold:.4});
+    sio.observe(sw);
+  }
+})();
+</script>
+
+<script type="module">
+  import{initializeApp}from'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+  import{getStorage,ref,getDownloadURL}from'https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js';
+  try{
+    const app=initializeApp({apiKey:'AIzaSyBySDXt_DauujKnTV077DF2GLWeMr27XuI',storageBucket:'zion-lopes-portfolio.appspot.com'});
+    const btn=document.getElementById('resume-btn');
+    if(btn)getDownloadURL(ref(getStorage(app),'resume.pdf')).then(u=>{btn.href=u}).catch(()=>{});
+  }catch(e){}
+</script>
+</body>
+</html>

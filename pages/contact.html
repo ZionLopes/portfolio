@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Zion Lopes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#090909;--s1:#111;--s2:#1a1a1a;--ln:#232323;--mut:#555;--mid:#999;
+  --tx:#dedad3;--wh:#f2ede4;--ac:#c9f53b;--acd:#090909;
+  --fD:'Bebas Neue',sans-serif;--fB:'Outfit',sans-serif;--fM:'DM Mono',monospace;
+  --ease:cubic-bezier(.16,1,.3,1);--ease2:cubic-bezier(.87,0,.13,1);
+  --W:1360px;--PX:clamp(1.25rem,4vw,3rem);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--fB);overflow-x:hidden;line-height:1.6}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button,input,textarea{font-family:inherit}
+body::after{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.032}
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--ln)}
+#cd,#cr{display:none;position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+@media(hover:hover)and(pointer:fine){*{cursor:none!important}#cd,#cr{display:block}#cd{width:6px;height:6px;background:var(--ac);top:0;left:0}#cr{width:32px;height:32px;border:1.5px solid rgba(201,245,59,.35);top:0;left:0;transition:width .3s var(--ease),height .3s var(--ease),border-color .3s,opacity .3s}#cr.hov{width:56px;height:56px;border-color:var(--ac);opacity:.3}}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;overflow:hidden}
+#ld-top,#ld-bot{position:absolute;left:0;width:100%;height:50%;background:var(--bg);transition:transform .9s var(--ease2)}
+#ld-top{top:0}#ld-bot{bottom:0}
+#loader.out #ld-top{transform:translateY(-100%)}
+#loader.out #ld-bot{transform:translateY(100%)}
+#loader.done{pointer-events:none;display:none}
+.ld-inner{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(1.5rem,4vw,3rem)}
+.ld-brand{font-family:var(--fD);font-size:clamp(1.5rem,4vw,2.5rem);letter-spacing:.14em;color:var(--wh);overflow:hidden}
+.ld-brand span{display:inline-block;transform:translateY(110%);animation:sup .7s var(--ease) .1s forwards}
+.ld-count-wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem}
+.ld-count{font-family:var(--fD);font-size:clamp(6rem,18vw,20rem);line-height:.85;letter-spacing:-.02em;color:var(--wh);overflow:hidden}
+.ld-count-inner{display:block;transform:translateY(100%);animation:sup .7s var(--ease) .3s forwards}
+.ld-side{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;gap:.75rem;padding-bottom:.5rem}
+.ld-tag{font-family:var(--fM);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);overflow:hidden}
+.ld-tag span{display:inline-block;transform:translateY(110%);animation:sup .6s var(--ease) .5s forwards}
+.ld-bar-wrap{width:100%;height:1px;background:var(--ln);position:relative;overflow:hidden}
+.ld-bar-fill{position:absolute;left:0;top:0;height:100%;background:var(--ac);width:0%}
+@keyframes sup{to{transform:translateY(0)}}
+
+/* nav */
+#nav{position:fixed;top:0;left:0;right:0;z-index:800;transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
+#nav.stuck{background:rgba(9,9,9,.92);backdrop-filter:blur(16px);border-color:var(--ln)}
+.nav-inner{max-width:var(--W);margin:0 auto;padding:1.35rem var(--PX);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem}
+.nav-logo{font-family:var(--fD);font-size:1.6rem;letter-spacing:.14em;color:var(--wh);transition:color .25s;justify-self:start}
+.nav-logo sup{color:var(--ac);font-size:.85rem}
+.nav-logo:hover{color:var(--ac)}
+.nav-links{display:flex;gap:2.5rem;align-items:center;justify-self:center}
+.nav-links a{font-family:var(--fM);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);position:relative;transition:color .25s;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--ac);transition:width .3s var(--ease)}
+.nav-links a:hover,.nav-links a.on{color:var(--wh)}
+.nav-links a.on::after,.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:.75rem;justify-self:end}
+.nav-avail{display:flex;align-items:center;gap:.45rem;font-family:var(--fM);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);border:1px solid rgba(201,245,59,.22);padding:.3rem .75rem}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--ac);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer}
+.nav-burger span{display:block;width:22px;height:1px;background:var(--tx);transition:transform .3s,opacity .3s}
+.nav-burger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.nav-drawer{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:790;background:rgba(9,9,9,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;transition:opacity .4s;pointer-events:none}
+.nav-drawer.open{opacity:1;pointer-events:all;display:flex}
+.nav-drawer a{font-family:var(--fD);font-size:clamp(2.5rem,8vw,5rem);letter-spacing:.06em;color:var(--wh);transition:color .25s}
+.nav-drawer a:hover{color:var(--ac)}
+
+/* shared */
+.wrap{max-width:var(--W);margin:0 auto;padding:0 var(--PX)}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--fM);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 2rem;border:none;cursor:pointer;white-space:nowrap;transition:transform .25s var(--ease),background .25s,color .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn-s{background:var(--ac);color:var(--acd)}
+.btn-s:hover{background:#d5ff3f;box-shadow:0 8px 30px rgba(201,245,59,.22)}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rv.on{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}
+.sec-lbl{font-family:var(--fM);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:.75rem;margin-bottom:3.5rem}
+.sec-lbl em{color:var(--ac);font-style:normal}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--ln);max-width:120px}
+
+/* ─── CONTACT LAYOUT ──────────────────────────────────── */
+.contact-page{padding-top:9rem;padding-bottom:6rem}
+.contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:8rem;align-items:start}
+
+/* left */
+.c-big{
+  font-family:var(--fD);font-size:clamp(4rem,9vw,10.5rem);
+  line-height:.86;letter-spacing:.02em;color:var(--wh);margin-bottom:2.5rem;
+  overflow:hidden;
+}
+.c-big .l{display:block;overflow:hidden}
+.c-big .l-in{display:block;transform:translateY(110%);transition:transform .9s var(--ease)}
+.c-big.anim .l-in{transform:translateY(0)}
+.c-big .l:nth-child(1) .l-in{transition-delay:.05s}
+.c-big .l:nth-child(2) .l-in{transition-delay:.2s;color:var(--ac)}
+
+.c-desc{font-size:.97rem;color:var(--mid);line-height:1.85;max-width:380px;margin-bottom:2.5rem;font-weight:300}
+.c-list{display:flex;flex-direction:column;gap:1rem;margin-bottom:2.5rem}
+.c-item{display:flex;align-items:center;gap:.9rem;font-family:var(--fM);font-size:.68rem;letter-spacing:.1em;color:var(--mut);text-transform:uppercase}
+.c-icon{width:30px;height:30px;border:1px solid var(--ln);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--ac);transition:border-color .25s,background .25s}
+.c-item:hover .c-icon{border-color:var(--ac);background:rgba(201,245,59,.08)}
+.c-socials{display:flex;gap:.5rem;flex-wrap:wrap}
+.soc{font-family:var(--fM);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.55rem 1.1rem;border:1px solid var(--ln);color:var(--mut);transition:all .25s;position:relative;overflow:hidden}
+.soc::before{content:'';position:absolute;inset:0;background:rgba(201,245,59,.07);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.soc:hover::before{transform:scaleX(1)}
+.soc:hover{border-color:var(--ac);color:var(--ac)}
+
+/* ─── FORM ────────────────────────────────────────────── */
+.c-form{}
+.form-pair{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.ff{
+  padding:1.5rem 0;
+  border-bottom:1px solid var(--ln);
+  position:relative;
+}
+.form-pair .ff:first-child{border-right:1px solid var(--ln);padding-right:2rem}
+.form-pair .ff:last-child{padding-left:2rem}
+.ff label{display:block;font-family:var(--fM);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:.6rem;transition:color .25s}
+.ff:focus-within label{color:var(--ac)}
+.ff input,.ff textarea{
+  width:100%;background:transparent;border:none;outline:none;
+  color:var(--tx);font-family:var(--fB);font-size:1rem;padding:0;
+  transition:color .25s;
+}
+.ff input::placeholder,.ff textarea::placeholder{color:var(--muted, #555)}
+.ff textarea{resize:none;min-height:130px}
+/* accent underline on focus */
+.ff::after{
+  content:'';position:absolute;bottom:-1px;left:0;width:0;height:1px;
+  background:var(--ac);transition:width .4s var(--ease);
+}
+.ff:focus-within::after{width:100%}
+.ff-full{border-bottom:1px solid var(--ln)}
+.ff-full .ff{border-bottom:none}
+
+.form-foot{padding-top:2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.form-status{font-family:var(--fM);font-size:.68rem;letter-spacing:.1em;display:none}
+.form-status.ok{color:var(--ac);display:block}
+.form-status.err{color:#f87171;display:block}
+.sbtn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--fM);font-size:.7rem;letter-spacing:.12em;
+  text-transform:uppercase;padding:.9rem 2.5rem;
+  background:var(--ac);color:var(--acd);border:none;cursor:pointer;
+  min-width:200px;justify-content:center;
+  position:relative;overflow:hidden;
+  transition:transform .25s var(--ease),box-shadow .25s;
+}
+.sbtn::before{
+  content:'';position:absolute;inset:0;
+  background:#d5ff3f;transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease);z-index:0;
+}
+.sbtn:hover::before{transform:scaleX(1)}
+.sbtn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,245,59,.22)}
+.sbtn span,.sbtn svg{position:relative;z-index:1}
+
+/* footer + btt */
+#ft{border-top:1px solid var(--ln);margin-top:6rem}
+.ft-inner{max-width:var(--W);margin:0 auto;padding:2rem var(--PX);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-copy,.ft-r{font-family:var(--fM);font-size:.62rem;letter-spacing:.1em;color:var(--mut)}
+.ft-socials{display:flex;gap:2rem}
+.ft-socials a{font-family:var(--fM);font-size:.62rem;letter-spacing:.1em;color:var(--mut);text-transform:uppercase;transition:color .25s;position:relative;}
+.ft-socials a::after{content:"";position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--ac);transition:width .3s var(--ease)}
+.ft-socials a:hover{color:var(--wh)}
+.ft-socials a:hover::after{width:100%}
+#btt{position:fixed;bottom:1.75rem;right:1.75rem;z-index:700;width:42px;height:42px;border:1px solid var(--ln);background:var(--bg);color:var(--mut);display:flex;align-items:center;justify-content:center;font-size:.9rem;text-decoration:none;opacity:0;visibility:hidden;transition:all .3s}
+#btt.on{opacity:1;visibility:visible}
+#btt:hover{border-color:var(--ac);color:var(--ac)}
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:900px){
+  .nav-links,.nav-avail{display:none}
+  .nav-burger{display:flex}
+  .nav-inner{grid-template-columns:1fr auto}
+  .contact-grid{grid-template-columns:1fr;gap:4rem}
+  .form-pair{grid-template-columns:1fr}
+  .form-pair .ff:first-child{border-right:none;padding-right:0}
+  .form-pair .ff:last-child{padding-left:0}
+}
+@media(max-width:560px){
+  .c-big{font-size:clamp(3rem,16vw,5rem)}
+  .c-socials{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+<div id="cd"></div><div id="cr"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div id="ld-top"></div><div id="ld-bot"></div>
+  <div class="ld-inner">
+    <div class="ld-brand"><span>ZION LOPES</span></div>
+    <div class="ld-count-wrap">
+      <div class="ld-count"><span class="ld-count-inner" id="ld-num">00</span></div>
+      <div class="ld-side">
+        <div class="ld-tag"><span>Let's Talk</span></div>
+        <div class="ld-tag"><span>Available for work</span></div>
+        <div class="ld-tag"><span>Mumbai, India</span></div>
+      </div>
+    </div>
+    <div class="ld-bar-wrap"><div class="ld-bar-fill" id="ld-bar"></div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<header id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="../index.html">ZL<sup>.</sup></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html" class="on">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-avail"><span class="nav-dot"></span>Available for work</span>
+      <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="nav-drawer" id="drawer">
+  <a href="../index.html">Home</a><a href="about.html">About</a>
+  <a href="projects.html">Projects</a><a href="contact.html">Contact</a>
+</nav>
+
+<main>
+  <div class="wrap contact-page">
+    <div class="sec-lbl rv"><em>03</em> / Contact</div>
+
+    <div class="contact-grid">
+
+      <!-- LEFT -->
+      <div>
+        <h1 class="c-big" id="c-big">
+          <span class="l"><span class="l-in">LET'S</span></span>
+          <span class="l"><span class="l-in">TALK.</span></span>
+        </h1>
+        <p class="c-desc rv">Whether it's a freelance project, a long-term collaboration, or just a conversation about the web — my inbox is always open.</p>
+        <div class="c-list rv d1">
+          <div class="c-item">
+            <span class="c-icon">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            Mumbai, Maharashtra, India
+          </div>
+          <div class="c-item">
+            <span class="c-icon">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </span>
+            Open to freelance &amp; full-time roles
+          </div>
+          <div class="c-item">
+            <span class="c-icon">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            Reply within 24 hours
+          </div>
+        </div>
+        <div class="c-socials rv d2">
+          <a href="https://github.com/ZionLopes" target="_blank" class="soc">GitHub</a>
+          <a href="#" target="_blank" class="soc">LinkedIn</a>
+          <a href="../resume.pdf" download class="soc">Resume ↓</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="rv d1">
+        <form id="contact-form" novalidate>
+          <div class="form-pair">
+            <div class="ff">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="John Doe" required>
+            </div>
+            <div class="ff">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="john@example.com" required>
+            </div>
+          </div>
+          <div class="ff-full">
+            <div class="ff">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Project inquiry / Freelance / Just saying hi">
+            </div>
+          </div>
+          <div class="ff-full">
+            <div class="ff">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project, timeline, and goals…" required></textarea>
+            </div>
+          </div>
+          <div id="form-status" class="form-status"></div>
+          <div class="form-foot">
+            <button type="submit" class="sbtn">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <span>Send Message</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer id="ft">
+  <div class="ft-inner">
+    <span class="ft-copy">© 2025 Zion Lopes. All rights reserved.</span>
+    <div class="ft-socials">
+      <a href="https://github.com/ZionLopes" target="_blank" rel="noopener">GitHub</a>
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:zion@example.com">Email</a>
+    </div>
+    <span class="ft-r">Designed &amp; Built in Mumbai 🇮🇳</span>
+  </div>
+</footer>
+<a href="#" id="btt">↑</a>
+
+<script>
+(function(){
+  /* LOADER */
+  var num=document.getElementById('ld-num'),bar=document.getElementById('ld-bar'),loader=document.getElementById('loader');
+  var start=null,dur=2200;
+  function step(ts){
+    if(!start)start=ts;
+    var p=Math.min((ts-start)/dur,1),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,c=Math.floor(e*100);
+    num.textContent=c<10?'0'+c:c;bar.style.width=c+'%';
+    if(p<1)requestAnimationFrame(step);
+    else{
+      num.textContent='100';bar.style.width='100%';
+      setTimeout(function(){
+        loader.classList.add('out');
+        setTimeout(function(){
+          loader.classList.add('done');loader.style.display='none';
+          var cb=document.getElementById('c-big');if(cb)cb.classList.add('anim');
+          document.querySelectorAll('.rv').forEach(function(el){
+            var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.1});
+            io.observe(el);
+          });
+        },950);
+      },350);
+    }
+  }
+  requestAnimationFrame(step);
+
+  /* CURSOR */
+  var cd=document.getElementById('cd'),cr=document.getElementById('cr');
+  if(cd&&window.matchMedia('(hover:hover)').matches){
+    var mx=0,my=0,rx=0,ry=0;
+    window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
+    (function r(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;cd.style.cssText='left:'+mx+'px;top:'+my+'px';cr.style.cssText='left:'+rx+'px;top:'+ry+'px';requestAnimationFrame(r)})();
+    document.querySelectorAll('a,button,.soc,.c-item').forEach(function(el){el.addEventListener('mouseenter',function(){cr.classList.add('hov')});el.addEventListener('mouseleave',function(){cr.classList.remove('hov')})});
+  }
+
+  /* NAV */
+  var nav=document.getElementById('nav'),burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
+  window.addEventListener('scroll',function(){nav.classList.toggle('stuck',window.scrollY>30)},{passive:true});
+  if(burger){
+    burger.addEventListener('click',function(){burger.classList.toggle('open');drawer.classList.toggle('open');document.body.style.overflow=drawer.classList.contains('open')?'hidden':''});
+    drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){burger.classList.remove('open');drawer.classList.remove('open');document.body.style.overflow=''})});
+  }
+
+  /* BTT */
+  var btt=document.getElementById('btt');
+  window.addEventListener('scroll',function(){btt.classList.toggle('on',window.scrollY>400)},{passive:true});
+  btt.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
+
+  /* FORM */
+  var form=document.getElementById('contact-form');
+  var status=document.getElementById('form-status');
+  if(form)form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    var btn=form.querySelector('.sbtn'),orig=btn.querySelector('span').textContent;
+    btn.querySelector('span').textContent='Sending…';btn.disabled=true;
+    status.className='form-status';status.textContent='';
+    var payload={
+      name:form.name.value.trim(),email:form.email.value.trim(),
+      subject:(form.subject&&form.subject.value.trim())||'—',
+      message:form.message.value.trim()
+    };
+    try{
+      var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      var data=await res.json();
+      if(res.ok&&data.ok){status.textContent="✓ Message sent — I'll get back to you soon.";status.className='form-status ok';form.reset();}
+      else throw new Error(data.error||'Server error');
+    }catch(err){status.textContent='✗ '+(err.message||'Something went wrong.');status.className='form-status err';}
+    finally{btn.querySelector('span').textContent=orig;btn.disabled=false;}
+  });
+})();
+</script>
+</body>
+</html>
